@@ -18,6 +18,6 @@ const yoga = createYoga({
  
 serve(yoga, {
   onListen({ hostname, port }) {
-    console.log(`Listening on http://${hostname}:${port}/${yoga.graphqlEndpoint}}`)
+    console.log(`Listening on http://${hostname}:${port}/${yoga.graphqlEndpoint}`)
   }
 })
