@@ -1,2 +1,6 @@
-# This is a sample implementation of Blog with Deno
+# API
 
+```
+# to run the local server
+deno task start
+```

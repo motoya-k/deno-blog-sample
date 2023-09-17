@@ -1,0 +1,20 @@
+{
+  "lock": "./lock.file",
+  "imports": {
+    "graphql-yoga": "npm:graphql-yoga@^3.7.3",
+    "prisma": "npm:prisma@^5.2.0",
+    "fishery": "npm:fishery@^2.2.2",
+    "prisma-client": "./.generated/client/deno/edge.ts",
+    "http/server": "https://deno.land/std@0.148.0/http/server.ts",
+    "dotenv": "https://deno.land/std@0.201.0/dotenv/mod.ts",
+    "ulid": "https://deno.land/x/ulid@v0.3.0/mod.ts"
+  },
+  "tasks": {
+    "start": "deno run --allow-net --allow-read src/server.ts",
+    "migrate:reset": "deno run -A npm:prisma@^5.2.0 migrate reset --force --skip-generate",
+    "migrate:create": "deno run -A npm:prisma@^5.2.0 migrate dev --create-only --skip-generate",
+    "migrate:apply": "deno run -A npm:prisma@^5.2.0 migrate dev --skip-generate",
+    "migrate:generate": "deno run -A  --unstable npm:prisma@^5.2.0 generate",
+    "seed": "deno run -A prisma/seeds/index.ts"
+  }
+}
