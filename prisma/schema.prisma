@@ -5,18 +5,17 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Post {
-  id          String   @id @default(cuid())
-  platform    Platform
+  id          String
+  platform    Int
   publishedAt DateTime
   createdAt   DateTime @default(now())
   updatedAt   DateTime @default(now()) @updatedAt
-}
 
-enum Platform {
-  Zenn
+  @@id([id, platform])
+  @@unique([platform, publishedAt])
 }

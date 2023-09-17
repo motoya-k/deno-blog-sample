@@ -1,17 +1,13 @@
 import { Factory } from "fishery";
-import { Post } from "prisma-client";
 import { ulid } from "ulid";
 
-import prisma from "../../../src/client/prisma.ts";
+import { PostEntity, Post } from "../../../src/entities/post.ts";
 
 export const PostFactory = Factory.define<Post>(({ params, onCreate }) => {
   onCreate(async (post) => {
     console.log(`Created post with id ${post.id}`);
-    const posts = await prisma.post.findMany();
-    console.log("posts", posts);
-    // await prisma.post.create({
-    //   data: post,
-    // });
+    const results = await PostEntity.objects.create(post);
+    console.log("results", results);
     return post;
   });
 

@@ -1,7 +1,7 @@
 import { PostFactory } from "./factories/index.ts";
 
 const createPosts = () => {
-  PostFactory.createList(3);
+  PostFactory.create();
 };
 
 const execute = () => {
