@@ -1,5 +1,6 @@
 // import { TimestampMixin } from "./shared.ts";
 import { Post as IPost } from "prisma-client";
+import { ulid } from "ulid";
 import { client } from "../client/db.ts";
 
 // const は別のところに切り出してもいいかも
@@ -23,12 +24,10 @@ export class PostManager {
   }
 
   async create(_data: Post): Promise<PostEntity> {
-    await client.connect();
     const data = this.toDB(_data);
     const results = await client.queryObject<IPost>(
-      `INSERT INTO posts (platform, published_at) VALUES (${data.platform}, ${data.publishedAt})`
+      `INSERT INTO "Post" (id, platform, "publishedAt") VALUES ('${ulid()}', ${data.platform}, '${data.publishedAt.toISOString()}');`
     );
-    await client.end();
     return new PostEntity(this.fromDB(results.rows[0]));
   }
 
@@ -41,7 +40,7 @@ export class PostManager {
   }
 }
 
-export type Platform = "Zenn";
+export type Platform = "Zenn" | "Qiita" | "Note";
 // これが GraphQL の Type でも使われる = Domain の型
 // IPost が DB の型
 export type Post = Omit<IPost, "platform"> & {

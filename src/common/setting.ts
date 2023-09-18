@@ -9,4 +9,7 @@ export class Setting {
     HOST: envVars.DATABASE_HOST,
     PORT: envVars.DATABASE_PORT,
   }
+  static readonly Zenn = {
+    USER_NAME: envVars.ZENN_USER_NAME,
+  }
 }

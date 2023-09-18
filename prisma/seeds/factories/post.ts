@@ -6,8 +6,7 @@ import { PostEntity, Post } from "../../../src/entities/post.ts";
 export const PostFactory = Factory.define<Post>(({ params, onCreate }) => {
   onCreate(async (post) => {
     console.log(`Created post with id ${post.id}`);
-    const results = await PostEntity.objects.create(post);
-    console.log("results", results);
+    await PostEntity.objects.create(post);
     return post;
   });
 
